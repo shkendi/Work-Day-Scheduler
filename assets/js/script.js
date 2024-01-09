@@ -4,10 +4,6 @@ $(document).ready(function () {
     var currentDay = dayjs().format('dddd, MMMM D YYYY')
     $('#currentDay').text(currentDay)
 
-    updateCurrentHour()
-
-    setInterval(updateCurrentHour(), 60000)
-
     var currentHour = dayjs().hour()
 
     // set up business hours
