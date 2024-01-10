@@ -50,14 +50,6 @@ $(document).ready(function () {
           .text()
           .replace(/[⌃\d.]/g, '')
       )
-
-      // if (blockHour < currentHour) {
-      //   $(this).removeClass('present future').addClass('past')
-      // } else if (blockHour === currentHour) {
-      //   $(this).removeClass('past future').addClass('present')
-      // } else {
-      //   $(this).removeClass('past present').addClass('future')
-      // }
     })
   }
   setInterval(updateCurrentHour(), 60000)
