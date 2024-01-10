@@ -4,8 +4,7 @@ $(document).ready(function () {
     var currentDay = dayjs().format('dddd, MMMM D YYYY')
     $('#currentDay').text(currentDay)
 
-    // var currentHour = dayjs().hour()
-    var currentHour = 12
+    var currentHour = dayjs().hour()
 
     // set up business hours
     var businessHours = 9
@@ -21,7 +20,7 @@ $(document).ready(function () {
       var eventInput = $('<textarea>').addClass(
         'col-md-10 description event-input'
       )
-      var $saveBtn = $('<button>')
+      var saveBtn = $('<button>')
         .addClass('col-md-1 saveBtn')
         .html('<i class="far fa-save"></i>')
 
@@ -33,7 +32,7 @@ $(document).ready(function () {
       } else if (hour > currentHour) {
         timeBlock.addClass('future')
       }
-      timeBlock.append(hourDiv, eventInput, $saveBtn)
+      timeBlock.append(hourDiv, eventInput, saveBtn)
       $('.container').append(timeBlock)
     }
   }
@@ -65,13 +64,12 @@ $(document).ready(function () {
   // updateCurrentHour()
 
   // Save button click event to store event in local storage
-  $('.container').on('click', function () {
-    console.log('hit')
-    var $eventText = $(this).siblings('.event-input').val()
-    var hourIndex = $(this).siblings('.hour').text()
-    console.log(hourIndex)
+  $('.time-block').on('click', function () {
+    var eventText = $(this).children('.event-input').val()
+    var hourIndex = $(this).children('.hour').text()
+    console.log($(this).children('.event-input').val())
 
-    localStorage.setItem(hourIndex, $eventText)
+    localStorage.setItem(hourIndex, eventText)
   })
 
   // Load events from local storage on page load
@@ -79,8 +77,9 @@ $(document).ready(function () {
     $('.hour').each(function () {
       var hourIndex = $(this).text()
       var storedEvent = localStorage.getItem(hourIndex)
-      if (storedEvent !== null) {
-        $(this).siblings('event-input').val(storedEvent)
+
+      if (storedEvent) {
+        $(this).siblings('.event-input').text(storedEvent)
       }
     })
   }
